@@ -1,0 +1,1 @@
+this exercise about exercise moudle in name: sequelize .
