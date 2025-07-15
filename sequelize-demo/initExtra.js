@@ -4,35 +4,35 @@ import { Post, User } from "./db_extra.js";
 
 // sequelize_db.random()// מחזיר לי ערך רנדומלי - קטע 
 
-// try {
-//     await Post.sync();
-//     await User.sync();
+try {
+    await Post.sync();
+    await User.sync();
 
-//     Post.create({
-//         title: "shaul",
-//         content: "asdfghjkl"
-//     })
+    Post.create({
+        title: "shaul",
+        content: "asdfghjkl"
+    })
 
-//     User.create({
-//         name: 'shaul',
-//         email: 'shshshsh@Z#@eh3riuyegfr',
-//     })
-//     const resPost = await Post.findAll({ raw: true });
-//     console.table(resPost);
-//     const dataPost = await resPost.id;
-//     console.log(dataPost);
-//     const resUser = await User.findAll({ raw: true });
-//     console.table(resUser);
+    User.create({
+        name: 'shaul',
+        email: 'shshshsh@Z#@eh3riuyegfr',
+    })
+    const resPost = await Post.findAll({ raw: true });
+    // console.table(resPost);
+    const dataPost = await resPost.id;
+    // console.log(dataPost);
+    const resUser = await User.findAll({ raw: true });
+    // console.table(resUser);
 
-//     User.hasMany(Post);
-//     console.table(resPost);
+    User.hasMany(Post);
+    // console.table(resPost);
 
-//     Post.belongsTo(User);
+    Post.belongsTo(User);
 
 
-// } catch (Err) {
-//     console.log('Err', Err);
-// }
+} catch (Err) {
+    console.log('Err', Err);
+}
 
 
 async function a() {
@@ -122,3 +122,11 @@ export async function findSearch() {
 // תרגיל 4 – קשרים והבאת נתונים עם include
 // מטרה: להכיר include (JOIN פנימי)
 
+export async function importingAllPostsByName(){
+    const res1 = User.findAll({include : Post}).then(data=>{console.table(data);})
+    console.log(res1);
+    console.log('....');
+    const res2 = Post.findAll({include: User}).then((data) =>filter(data =>data))
+    console.table(res2);
+}
+importingAllPostsByName();
